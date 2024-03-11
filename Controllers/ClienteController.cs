@@ -2,6 +2,7 @@
 using GarageManager.Database.Repositorio;
 using GarageManager.Models;
 using GarageManager.Models.Validators;
+using GarageManagerAPI.Data.Repositorio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -16,7 +17,10 @@ namespace GarageManager.Controllers
     [ApiController]
     public class ClienteController : ControllerBase
     {
+
+
         public ClienteRepositorio Repositorio = new ClienteRepositorio();
+       
 
         [HttpPost]
         [Route("cliente/adicionar")]
@@ -28,12 +32,18 @@ namespace GarageManager.Controllers
 
             var validator = new ClienteValidator();
             var validationResult = await validator.ValidateAsync(cliente);
+                                
 
                     
             if (validationResult.IsValid)
             {
                 try
                 {
+                   
+                    
+
+
+
                     await Repositorio.AddAsync(cliente);
                     return Created("", cliente);
 

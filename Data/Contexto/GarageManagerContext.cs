@@ -1,5 +1,7 @@
 ﻿using GarageManager.Database.Configs;
 using GarageManager.Models;
+using GarageManagerAPI.Data.Configs;
+using GarageManagerAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace GarageManager.Database.Contexto
@@ -8,8 +10,8 @@ namespace GarageManager.Database.Contexto
     {
         public DbSet<Cliente> CLIENTES { get; set; }
         public DbSet<Usuario> USUARIOS { get; set; }
-       
-       
+        public DbSet<Parametrizacao> PARAMETRIZACAO { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -22,7 +24,8 @@ namespace GarageManager.Database.Contexto
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ClienteConfig());
-            modelBuilder.ApplyConfiguration(new UsuarioConfig());
+            modelBuilder.ApplyConfiguration(new UsuarioConfig()); 
+            modelBuilder.ApplyConfiguration(new ParametrizacaoConfig());
 
         }
     }

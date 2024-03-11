@@ -4,6 +4,7 @@ using FluentValidation;
 using GarageManager.Data.Repositorio.Formatadores;
 using GarageManager.Database.Contexto;
 using GarageManager.Models;
+using GarageManagerAPI.Data.Repositorio;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,15 +13,32 @@ using System.Threading.Tasks;
 
 namespace GarageManager.Database.Repositorio
 {
+        
     public class ClienteRepositorio
     {
+        public ParametrizacaoRepositorio ParametrizacaoRepositorio = new ParametrizacaoRepositorio();
+        
+
         public async Task<Cliente> AddAsync(Cliente cliente)
         {
+               
+            
             using (var banco = new GarageManagerContext())
             {
-                
-                cliente.Nome = Formatador.TitleCase(cliente.Nome);
+                var configuracao = ParametrizacaoRepositorio.ObterParametros();
+
+                if (configuracao.HomologacaoDireta == true)
+                {
+                    cliente.Situacao = "Normal";
+                }
+                if(configuracao.HomologacaoDireta == false)
+                {
+
                 cliente.Situacao = "Pendente";
+                }
+
+
+                cliente.Nome = Formatador.TitleCase(cliente.Nome);
                 await banco.CLIENTES.AddAsync(cliente);
                 await banco.SaveChangesAsync();
             }
