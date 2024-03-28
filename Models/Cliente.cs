@@ -10,7 +10,6 @@ namespace GarageManager.Models
         public string Cpf { get; set; }
         public string Email { get; set; }
         public string Celular { get; set; }
-
         public string? Telefone { get; set; }
         public string Rua { get; set; }
         public string Numero { get; set; }

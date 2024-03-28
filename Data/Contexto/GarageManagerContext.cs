@@ -10,6 +10,7 @@ namespace GarageManager.Database.Contexto
     {
         public DbSet<Cliente> CLIENTES { get; set; }
         public DbSet<Usuario> USUARIOS { get; set; }
+        public DbSet<Produto> PRODUTOS { get; set; }
         public DbSet<Parametrizacao> PARAMETRIZACAO { get; set; }
 
 
@@ -24,8 +25,9 @@ namespace GarageManager.Database.Contexto
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ClienteConfig());
-            modelBuilder.ApplyConfiguration(new UsuarioConfig()); 
-            modelBuilder.ApplyConfiguration(new ParametrizacaoConfig());
+            modelBuilder.ApplyConfiguration(new UsuarioConfig());
+            modelBuilder.ApplyConfiguration(new ParametrizacaoConfig()); 
+            modelBuilder.ApplyConfiguration(new ProdutoConfig());
 
         }
     }

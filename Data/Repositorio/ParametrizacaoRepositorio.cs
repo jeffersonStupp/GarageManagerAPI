@@ -13,10 +13,10 @@ namespace GarageManagerAPI.Data.Repositorio
         {
             using (var banco = new GarageManagerContext())
             {
-
-
+                
                 banco.PARAMETRIZACAO.Update(parametros);
-                banco.SaveChangesAsync();
+
+                banco.SaveChanges();
             }
             return parametros;
         }

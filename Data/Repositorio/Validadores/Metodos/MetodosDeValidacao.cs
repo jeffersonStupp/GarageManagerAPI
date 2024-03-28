@@ -92,13 +92,8 @@ namespace GarageManagerAPI.Data.Repositorio.Validadores.Metodos
                 idade--;
             }
 
-            // Verifica se a idade é menor que 120 anos
-            if (idade >= 120 && idade <= 12)
-            {
-                return false;
-            }
+            
 
-            // Todas as validações passaram
             return true;
         }
 

@@ -30,13 +30,16 @@ namespace GarageManagerAPI.Controllers
             novosParametros.HomologacaoDireta = parametros.HomologacaoDireta;
             novosParametros.IdadeMinimaCadastro = parametros.IdadeMinimaCadastro;
             novosParametros.IdadeMaximaCadastro = parametros.IdadeMaximaCadastro;
+            novosParametros.MargemPecas = parametros.MargemPecas;
+            novosParametros.MaoDeObra = parametros.MaoDeObra;
+            novosParametros.DescontoPagamentoVista = parametros.DescontoPagamentoVista;
 
 
 
             Repositorio.AlterarParametros(novosParametros);
+            
+
             return Ok(novosParametros);
-
-
 
 
 

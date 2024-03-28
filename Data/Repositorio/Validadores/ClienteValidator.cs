@@ -1,12 +1,15 @@
 ﻿
 using FluentValidation;
+using GarageManagerAPI.Data.Repositorio;
 using GarageManagerAPI.Data.Repositorio.Validadores.Metodos;
 using System.Text.RegularExpressions;
 
 namespace GarageManager.Models.Validators
 {
+    
     public class ClienteValidator : AbstractValidator<Cliente>
     {
+        public ParametrizacaoRepositorio ParametrizacaoRepositorio = new ParametrizacaoRepositorio();
         public ClienteValidator()
         {
             RuleFor(cliente => cliente.Nome)
@@ -20,7 +23,8 @@ namespace GarageManager.Models.Validators
 
             RuleFor(cliente => cliente.DataNascimento)
             .NotNull().WithMessage("A data de nascimento não pode ser nula.")
-            .Must(MetodosDeValidacao.ValidarDataNascimento).WithMessage("A data de nascimento não é válida.");
+            .Must(MetodosDeValidacao.ValidarDataNascimento).WithMessage("A data de nascimento não é válida.")
+            .Must(IdadeDefinidaValida).WithMessage("A data de nascimento não é válida.");
 
             RuleFor(cliente => cliente.Cpf)
            .NotEmpty().WithMessage("O CPF é obrigatório.")
@@ -40,5 +44,24 @@ namespace GarageManager.Models.Validators
 
 
         }
+
+        public bool IdadeDefinidaValida(DateTime data)
+        {
+            int idade = DateTime.Now.Year - data.Year;
+            if (DateTime.Now < data.AddYears(idade))
+            {
+                idade--;
+            }
+            var parametros = ParametrizacaoRepositorio.ObterParametros();
+            if (idade >= parametros.IdadeMinimaCadastro && parametros.IdadeMaximaCadastro >= idade)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }

@@ -4,6 +4,7 @@ using GarageManager.Database.Contexto;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiCentralPark.Migrations
 {
     [DbContext(typeof(GarageManagerContext))]
-    partial class GarageManagerContextModelSnapshot : ModelSnapshot
+    [Migration("20240318230056_ProdutoImplement")]
+    partial class ProdutoImplement
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -162,9 +165,6 @@ namespace ApiCentralPark.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("DescontoPagamentoVista")
-                        .HasColumnType("int");
-
                     b.Property<bool>("HomologacaoDireta")
                         .HasColumnType("bit");
 
@@ -172,12 +172,6 @@ namespace ApiCentralPark.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("IdadeMinimaCadastro")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("MaoDeObra")
-                        .HasColumnType("money");
-
-                    b.Property<int>("MargemPecas")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -188,12 +182,9 @@ namespace ApiCentralPark.Migrations
                         new
                         {
                             Id = 1,
-                            DescontoPagamentoVista = 0,
                             HomologacaoDireta = false,
                             IdadeMaximaCadastro = 100,
-                            IdadeMinimaCadastro = 0,
-                            MaoDeObra = 0m,
-                            MargemPecas = 0
+                            IdadeMinimaCadastro = 0
                         });
                 });
 
@@ -213,25 +204,19 @@ namespace ApiCentralPark.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Fabricante")
+                    b.Property<string>("Fabicante")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Fornecedor")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("Garantia")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Grupo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Garantia")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Preco")
                         .HasColumnType("money");
-
-                    b.Property<string>("Tipo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
