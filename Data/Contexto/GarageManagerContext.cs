@@ -11,6 +11,7 @@ namespace GarageManager.Database.Contexto
         public DbSet<Cliente> CLIENTES { get; set; }
         public DbSet<Usuario> USUARIOS { get; set; }
         public DbSet<Produto> PRODUTOS { get; set; }
+        public DbSet<Veiculo> VEICULOS { get; set; }
         public DbSet<Parametrizacao> PARAMETRIZACAO { get; set; }
 
 
@@ -28,6 +29,7 @@ namespace GarageManager.Database.Contexto
             modelBuilder.ApplyConfiguration(new UsuarioConfig());
             modelBuilder.ApplyConfiguration(new ParametrizacaoConfig()); 
             modelBuilder.ApplyConfiguration(new ProdutoConfig());
+            modelBuilder.ApplyConfiguration(new VeiculoConfig());
 
         }
     }

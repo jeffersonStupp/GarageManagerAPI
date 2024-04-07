@@ -1,4 +1,5 @@
-﻿using System.Security.Policy;
+﻿using GarageManagerAPI.Models;
+using System.Collections.ObjectModel;
 
 namespace GarageManager.Models
 {
@@ -19,6 +20,7 @@ namespace GarageManager.Models
         public string Estado { get; set; }
         public string Situacao { get; set; }
         public string? Obs { get; set; }
+        public List <Veiculo>? Veiculos { get; set; }
 
     }
 }
